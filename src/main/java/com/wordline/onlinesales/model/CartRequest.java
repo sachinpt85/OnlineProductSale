@@ -2,6 +2,7 @@ package com.wordline.onlinesales.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wordline.onlinesales.enums.ClientType;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,8 @@ public class CartRequest {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ClientData {
+
+        @NotNull
         private ClientType type;
         private String clientId;
 
@@ -32,16 +35,5 @@ public class CartRequest {
         private String businessRegistrationNumber;
         private String intraCommunityVatNumber;
 
-        public void setType(String typeStr) {
-            if (typeStr == null || typeStr.trim().isEmpty()) {
-                throw new IllegalArgumentException("Client type is required");
-            }
-            try {
-                this.type = ClientType.valueOf(typeStr.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid client type: " + typeStr +
-                        ". Valid values: INDIVIDUAL, PROFESSIONAL");
-            }
-        }
     }
 }

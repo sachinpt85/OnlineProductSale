@@ -21,35 +21,6 @@ public class PriceCalculator {
         this.professionalLowRevenuePrices = initializeProfessionalLowRevenuePrices();
     }
 
-    public BigDecimal getPrice(Client client, String productTypeStr) {
-        ProductType productType = parseProductType(productTypeStr);
-
-        if (client instanceof IndividualClient) {
-            return individualPrices.get(productType);
-        }
-
-        if (client instanceof ProfessionalClient professional) {
-            return professional.isHighRevenueClient()
-                    ? professionalHighRevenuePrices.get(productType)
-                    : professionalLowRevenuePrices.get(productType);
-        }
-
-        throw new IllegalArgumentException("Unknown client type");
-    }
-
-    private ProductType parseProductType(String productTypeStr) {
-        if (productTypeStr == null) {
-            throw new IllegalArgumentException("Product type cannot be null");
-        }
-
-        try {
-            return ProductType.valueOf(productTypeStr.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid product type: " + productTypeStr +
-                    ". Valid values: HIGH_END_PHONE, MID_RANGE_PHONE, LAPTOP");
-        }
-    }
-
     private Map<ProductType, BigDecimal> initializeIndividualPrices() {
         Map<ProductType, BigDecimal> prices = new EnumMap<>(ProductType.class);
         prices.put(ProductType.HIGH_END_PHONE, BigDecimal.valueOf(1500.00));

@@ -1,29 +1,34 @@
 package com.wordline.onlinesales.controller;
 
-
+import com.wordline.onlinesales.acl.CartApiAdapter;
 import com.wordline.onlinesales.model.CartRequest;
 import com.wordline.onlinesales.model.CartResponse;
-import com.wordline.onlinesales.service.CartService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/cart")
 public class CartController {
 
-    private final CartService cartService;
+    private final CartApiAdapter cartApiAdapter;
 
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
+    public CartController(CartApiAdapter cartApiAdapter) {
+        this.cartApiAdapter = cartApiAdapter;
     }
 
     @PostMapping("/calculate")
-    public CartResponse calculateCart(@Valid @RequestBody CartRequest request) {
-        return cartService.calculateTotal(request);
+    public ResponseEntity<CartResponse> calculateCart(
+            @Valid @RequestBody CartRequest request) {
+
+        var response =
+                cartApiAdapter.calculateCart(request);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/health")
-    public String healthCheck() {
-        return "API is running";
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("API is running");
     }
 }

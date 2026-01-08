@@ -1,11 +1,11 @@
 package com.wordline.onlinesales.model;
 
-import lombok.Getter;
+import com.wordline.onlinesales.enums.ClientType;
 
-@Getter
 public class IndividualClient extends Client {
-    private String firstName;
-    private String lastName;
+
+    private final String firstName;
+    private final String lastName;
 
     public IndividualClient(String clientId, String firstName, String lastName) {
         super(clientId);
@@ -13,7 +13,13 @@ public class IndividualClient extends Client {
         this.lastName = lastName;
     }
 
-    public String getFullName() {
+    @Override
+    public String getDisplayName() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public ClientType getClientType() {
+        return ClientType.INDIVIDUAL;
     }
 }

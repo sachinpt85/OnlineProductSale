@@ -1,12 +1,17 @@
 package com.wordline.onlinesales.model;
-public abstract class Client {
-    protected String clientId;
 
-    public Client(String clientId) {
+import com.wordline.onlinesales.enums.ClientType;
+import lombok.Getter;
+
+@Getter
+public abstract class Client {
+
+    protected final String clientId;
+
+    protected Client(String clientId) {
         this.clientId = clientId;
     }
 
-    public String getClientId() {
-        return clientId;
-    }
+    public abstract String getDisplayName();
+    public abstract ClientType getClientType();
 }
