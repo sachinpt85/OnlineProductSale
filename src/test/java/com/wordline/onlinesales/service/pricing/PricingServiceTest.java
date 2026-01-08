@@ -113,24 +113,6 @@ class PricingServiceTest {
         assertEquals(new BigDecimal("1000"), price);
     }
 
-    // ---------- ERROR CASES ----------
-
-    @Test
-    void unknownClientType_shouldThrowException() {
-        Client unknownClient = new Client("UNKNOWN") {
-            @Override
-            public String getDisplayName() {
-                return "Unknown";
-            }
-            @Override
-            public com.wordline.onlinesales.enums.ClientType getClientType() {
-                return null;
-            }
-        };
-
-        assertThrows(IllegalArgumentException.class, () ->
-                pricingService.getPrice(unknownClient, ProductType.LAPTOP));
-    }
 
     // ---------- HELPERS ----------
 

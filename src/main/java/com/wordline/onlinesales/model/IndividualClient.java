@@ -2,7 +2,7 @@ package com.wordline.onlinesales.model;
 
 import com.wordline.onlinesales.enums.ClientType;
 
-public class IndividualClient extends Client {
+public final class IndividualClient extends Client {
 
     private final String firstName;
     private final String lastName;

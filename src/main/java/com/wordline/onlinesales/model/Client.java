@@ -4,7 +4,7 @@ import com.wordline.onlinesales.enums.ClientType;
 import lombok.Getter;
 
 @Getter
-public abstract class Client {
+public sealed abstract class Client  permits IndividualClient, ProfessionalClient  {
 
     protected final String clientId;
 

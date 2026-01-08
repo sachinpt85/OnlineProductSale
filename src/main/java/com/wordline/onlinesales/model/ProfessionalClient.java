@@ -4,7 +4,7 @@ import com.wordline.onlinesales.enums.ClientType;
 
 import java.math.BigDecimal;
 
-public class ProfessionalClient extends Client {
+public final class ProfessionalClient extends Client {
 
     private static final BigDecimal HIGH_REVENUE_THRESHOLD =
             BigDecimal.valueOf(10_000_000);
